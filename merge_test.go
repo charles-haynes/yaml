@@ -28,3 +28,15 @@ func TestMergeWithOverwrite(t *testing.T) {
 	}
 	assertResultComplex(t, expected, result)
 }
+
+func TestMergeYAML(t *testing.T) {
+	overwriteFlag = true
+	result, _ := mergeYaml([]string{"examples/up.yaml", "examples/gr.yaml"})
+	expected := yaml.MapSlice{
+		yaml.MapItem{Key: "image", Value: "https://images.gr-assets.com/books/1328834743m/2865998.jpg"},
+		yaml.MapItem{Key: "pages", Value: 240},
+		yaml.MapItem{Key: "title", Value: "Fashioning Technology: A DIY Intro to Smart Crafting"},
+		yaml.MapItem{Key: "authors", Value: []interface{}{"Syuzi Pakhchyan"}},
+	}
+	assertResultComplex(t, expected, result)
+}
